@@ -1,0 +1,20 @@
+{
+  "name": "timluu-service",
+  "version": "1.0.0",
+  "description": "Package for the L'AirDnD Reviews module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "mysql -uroot -p < schema.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-AirDnD/timluu-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L-AirDnD/timluu-service/issues"
+  },
+  "homepage": "https://github.com/L-AirDnD/timluu-service#readme"
+}
