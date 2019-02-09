@@ -1,11 +1,10 @@
 let mysql = require('mysql');
-let userInfo = require('../config.js');
+let config = require('../config.js');
 let Promise = require('bluebird');
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 let faker = require('faker');
 
-let connection = mysql.createConnection(userInfo);
-connection.connect();
+let connection = mysql.createConnection(config);
 
 connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;`)
   .then(() => { 

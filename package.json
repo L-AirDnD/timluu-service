@@ -2,11 +2,12 @@
   "name": "timluu-service",
   "version": "1.0.0",
   "description": "Package for the L'AirDnD Reviews module.",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./database/seed.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "serv:dev": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,12 @@
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "mysql": "^2.16.0",
+    "nodemon": "^1.18.10",
     "path": "^0.12.7",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
