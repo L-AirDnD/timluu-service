@@ -6,6 +6,10 @@ let faker = require('faker');
 
 let connection = mysql.createConnection(config);
 
+/*
+ * Database and table schema creation
+ */
+
 connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;`)
   .then(() => { 
     return connection.queryAsync(`USE lairdnd;`);
@@ -54,6 +58,9 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
     );`);
   })
   .then(() => {
+    /*
+     * Seed data of 100 owners
+     */
     let owners = [];
     for(var i = 0; i < 100; i++) {
       let randomOwner = faker.name.findName();
@@ -63,6 +70,9 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
     return connection.queryAsync(`INSERT INTO owners (name) VALUES (${owners});`)
   })
   .then(() => {
+    /*
+     * Seed data of 100 offerings
+     */
     let offerings = [];
     for(var i = 0; i < 100; i++) {
       let randomPlace = faker.address.city() + faker.address.country();
@@ -76,6 +86,9 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
     return connection.queryAsync(`INSERT INTO offerings (title, owner_id) VALUES (${offerings});`)
   })
   .then(() => {
+    /*
+     * Seed data of 100 guests
+     */
     let guests = [];
     for(var i = 0; i < 100; i++) {
       let randomGuest = faker.name.findName();
@@ -86,6 +99,10 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
     return connection.queryAsync(`INSERT INTO guests (name, photo_url) VALUES (${guests});`)
   })
   .then(() => {
+    /*
+     * Seed data of 100 reviews:
+     * each review contains 6 sub-ratings
+     */
     let reviews = [];
     for(var i = 0; i < 100; i++) {
       let review = []; 
@@ -134,7 +151,7 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
       VALUES (${reviews});`);
   })
   .then(() => {
-    console.log('Data has been loaded.');
+    console.log('Data has been seeded.');
     connection.end();
   })
   .catch((err) => { 

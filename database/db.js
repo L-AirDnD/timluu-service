@@ -12,12 +12,6 @@ let getReviewsAtOffering = (offeringId) => {
     WHERE offerings.id=${offeringId} AND reviews.offering_id=offerings.id AND offerings.owner_id=owners.id AND reviews.guest_id=guests.id;`);
 }
 
-/* TEST Query
-SELECT reviews.id, offerings.title, owners.name, guests.name, reviews.date_posted, reviews.comment, reviews.reply, reviews.ratings 
-FROM reviews, offerings, owners, guests 
-  WHERE offerings.id=1 AND reviews.offering_id=offerings.id AND offerings.owner_id=owners.id AND reviews.guest_id=guests.id;
-*/
-
 module.exports = {
   getReviewsAtOffering, 
   connection
