@@ -13,6 +13,5 @@ let getReviewsAtOffering = (offeringId) => {
 }
 
 module.exports = {
-  getReviewsAtOffering, 
-  connection
+  getReviewsAtOffering
 }
