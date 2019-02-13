@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   getReviews(offeringId) {
-    axios.get(`/${offeringId}/api/reviews`)
+    axios.get(`/${offeringId}`)
       .then((response) => {
         this.setState({
           reviews: response.data
