@@ -1,5 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react';
+import { 
+  ReviewInfo, 
+  ReviewComment, 
+  ReviewImage, 
+  NameDate,
+  ReviewName, 
+  ReviewDate, 
+  ReviewFlag 
+} from '../commentStyles.jsx';
+import { Flag } from 'styled-icons/feather';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -20,11 +30,20 @@ class Comment extends React.Component {
         {this.props.reviews.map((review) => {
           return (
             <div>
-              <div>Insert Image here.</div>
-              <div>{review.name}</div>
-              <div>{this.convertDate(review.date_posted)}</div>
-              <div>Insert Flag button here.</div>
-              <div>{review.comment}</div>
+              <ReviewInfo>
+                <ReviewImage src={`https://s3-us-west-1.amazonaws.com/lairdnd-guests/sample_profile_pics/image_${review.id}.jpg`}>
+                </ReviewImage>
+                <NameDate>
+                  <ReviewName>{review.guest}</ReviewName>
+                  <ReviewDate>{this.convertDate(review.date_posted)}</ReviewDate>
+                </NameDate>
+                <ReviewFlag>
+                  <Flag size="15"/>  
+                </ReviewFlag>
+              </ReviewInfo>
+              <ReviewComment>
+                <div>{review.comment}</div>
+              </ReviewComment>  
             </div>
           )
         })}

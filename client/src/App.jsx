@@ -5,6 +5,8 @@ import Rating from './Rating.jsx';
 import SearchBar from './SearchBar.jsx';
 import Comment from './Comment.jsx';
 import PageNumber from './PageNumber.jsx';
+import { AppContainer } from '../appStyles.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews(4);
+    this.getReviews(3);
   }
 
   getReviews(offeringId) {
@@ -33,11 +35,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <AppContainer>
         <Rating /><SearchBar />
         <Comment reviews={this.state.reviews}/>
         <PageNumber />
-      </div>
+      </AppContainer>
     )
   }
 }
