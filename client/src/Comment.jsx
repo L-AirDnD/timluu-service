@@ -9,7 +9,7 @@ import {
   ReviewDate, 
   ReviewFlag 
 } from '../commentStyles.jsx';
-import { Flag } from 'styled-icons/feather';
+import { Flag } from 'styled-icons/feather/Flag';
 
 class Comment extends React.Component {
   constructor(props) {
