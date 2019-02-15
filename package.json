@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./database/seed.js",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --display-modules",
     "serv:dev": "nodemon server/index.js"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
