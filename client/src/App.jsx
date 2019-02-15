@@ -81,7 +81,6 @@ class App extends React.Component {
   render() {
     let totalRating = this.computeTotalRating();
     let subRatings = this.computeSubRatings();
-    console.log(subRatings);
     return (
       <AppContainer>
         <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 

@@ -4,10 +4,11 @@
   "description": "Package for the L'AirDnD Reviews module.",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./database/seed.js",
     "build": "webpack --config webpack.config.js",
-    "serv:dev": "nodemon server/index.js"
+    "serv:dev": "nodemon server/index.js",
+    "test": "jest || true",
+    "test:coverage": "jest --coverage --colors || true"
   },
   "repository": {
     "type": "git",
@@ -39,13 +40,17 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   }
