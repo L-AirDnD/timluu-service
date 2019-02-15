@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react';
 import axios from 'axios';
 import Rating from './Rating.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -22,7 +21,7 @@ class App extends React.Component {
   }
 
   parseRatings(data) {
-    for(var review of data) {
+    for(let review of data) {
       review.ratings = JSON.parse(review.ratings);
     }
   }
@@ -40,10 +39,33 @@ class App extends React.Component {
       })
   }
 
+  computeTotalRating() {
+    let averageRatings = [];
+
+    for(let review of this.state.reviews) {
+      let averageRating = 0;
+      for(let rating in review.ratings) {
+        rating = review.ratings[rating];
+        averageRating += rating;
+      }
+      averageRating = averageRating / 6.0;
+      averageRatings.push(averageRating);
+    }
+
+    let totalRating = averageRatings.reduce((total, current) => {
+      return total + current;
+    }, 0) / this.state.reviews.length;
+
+    return totalRating;
+  }
+
   render() {
+    let totalRating = this.computeTotalRating();
     return (
       <AppContainer>
-        <Rating total={true}/><SearchBar />
+        <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 
+        total={isNaN(totalRating) ? 0 : totalRating}/>
+        <SearchBar />
         <Rating />
         <Comment reviews={this.state.reviews}/>
         <PageNumber />
