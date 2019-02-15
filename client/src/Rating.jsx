@@ -7,11 +7,19 @@ class Rating extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        Insert Ratings here.
-      </div>
-    )
+    if(this.props.total === true) {
+      return ( 
+        <div>
+          Total Ratings Here.
+        </div>
+      )
+    } else{
+      return (
+        <div>
+          Insert Ratings here.
+        </div>
+      )
+    }
   }
 }
 

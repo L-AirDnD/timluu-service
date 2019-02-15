@@ -21,9 +21,16 @@ class App extends React.Component {
     this.getReviews(3);
   }
 
+  parseRatings(data) {
+    for(var review of data) {
+      review.ratings = JSON.parse(review.ratings);
+    }
+  }
+
   getReviews(offeringId) {
     axios.get(`/${offeringId}`)
       .then((response) => {
+        this.parseRatings(response.data);
         this.setState({
           reviews: response.data
         })
@@ -36,7 +43,8 @@ class App extends React.Component {
   render() {
     return (
       <AppContainer>
-        <Rating /><SearchBar />
+        <Rating total={true}/><SearchBar />
+        <Rating />
         <Comment reviews={this.state.reviews}/>
         <PageNumber />
       </AppContainer>
