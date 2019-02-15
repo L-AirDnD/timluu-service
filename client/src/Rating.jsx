@@ -1,5 +1,5 @@
 import React from 'react';
-import { Top, GreenStar, GreenStarHalf, GreenStarBorder } from '../ratingStyles.jsx';
+import { Top, NumOfReviews, GreenStar, GreenStarHalf, GreenStarBorder } from '../ratingStyles.jsx';
 
 class Rating extends React.Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class Rating extends React.Component {
     } else if(decimal >= 0.25) {
       stars[wholeNum] = 0.5
     }
-
     return stars;
   }
 
@@ -25,14 +24,16 @@ class Rating extends React.Component {
       let stars = this.convertNumToStars(this.props.total);
       return ( 
         <Top>
-          {this.props.numOfReviews} Reviews
+          <NumOfReviews>
+            {this.props.numOfReviews} Reviews
+          </NumOfReviews>
           {stars.map((num) => {
             if(num === 1) {
-              return (<GreenStar size="15"/>);
+              return (<GreenStar size="20"/>);
             } else if(num === 0) {
-              return (<GreenStarBorder size="15"/>);
+              return (<GreenStarBorder size="20"/>);
             } else {
-              return (<GreenStarHalf size="15"/>);
+              return (<GreenStarHalf size="20"/>);
             }
           })}
         </Top>

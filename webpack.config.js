@@ -7,7 +7,6 @@ module.exports = {
     pathinfo: true,
     filename: "bundle.js"
   },
-  mode: "production",
   module: {
     rules: [
       {
@@ -20,6 +19,5 @@ module.exports = {
         }
       }
     ]
-  },
-  watch: true
+  }
 }

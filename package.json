@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./database/seed.js",
-    "build": "webpack --config webpack.config.js --display-modules",
+    "build": "webpack --config webpack.config.js",
     "serv:dev": "nodemon server/index.js"
   },
   "repository": {
