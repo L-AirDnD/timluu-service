@@ -1,5 +1,18 @@
 import React from 'react';
-import { Top, NumOfReviews, GreenStar, GreenStarHalf, GreenStarBorder } from '../ratingStyles.jsx';
+import SearchBar from './SearchBar.jsx';
+import { 
+  Top, 
+  NumOfReviews,
+  Stars,
+  GreenStar, 
+  GreenStarHalf, 
+  GreenStarBorder,
+  SubRatings,
+  RatingsColumn,
+  RatingField,
+  RatingName,
+  RatingStars
+} from '../ratingStyles.jsx';
 
 class Rating extends React.Component {
   constructor(props) {
@@ -16,33 +29,62 @@ class Rating extends React.Component {
     } else if(decimal >= 0.25) {
       stars[wholeNum] = 0.5
     }
-    return stars;
+    return stars.map((num) => {
+      if(num === 1) {
+        return (<GreenStar size="20"/>);
+      } else if(num === 0) {
+        return (<GreenStarBorder size="20"/>);
+      } else {
+        return (<GreenStarHalf size="20"/>);
+      }
+    });
   }
 
   render() {
     if(this.props.isTotal === true) {
-      let stars = this.convertNumToStars(this.props.total);
       return ( 
         <Top>
           <NumOfReviews>
             {this.props.numOfReviews} Reviews
           </NumOfReviews>
-          {stars.map((num) => {
-            if(num === 1) {
-              return (<GreenStar size="20"/>);
-            } else if(num === 0) {
-              return (<GreenStarBorder size="20"/>);
-            } else {
-              return (<GreenStarHalf size="20"/>);
-            }
-          })}
+          <Stars>
+            {this.convertNumToStars(this.props.total)}
+          </Stars>
+          <SearchBar />
         </Top>
       )
     } else{
       return (
-        <div>
-          Insert Ratings here.
-        </div>
+        <SubRatings>
+          <RatingsColumn>
+            <RatingField>
+              <RatingName>Accuracy</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.accuracy)}</RatingStars>
+            </RatingField>
+            <RatingField>
+              <RatingName>Communication</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.communication)}</RatingStars>
+            </RatingField>
+            <RatingField>
+              <RatingName>Cleanliness</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.cleanliness)}</RatingStars>
+            </RatingField>
+          </RatingsColumn>
+          <RatingsColumn>
+            <RatingField>
+              <RatingName>Location</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.location)}</RatingStars>
+            </RatingField>
+            <RatingField>
+              <RatingName>Check-In</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.checkin)}</RatingStars>
+            </RatingField>
+            <RatingField>
+              <RatingName>Value</RatingName>
+              <RatingStars>{this.convertNumToStars(this.props.subRatings.value)}</RatingStars>
+            </RatingField>
+          </RatingsColumn>
+        </SubRatings>
       )
     }
   }
