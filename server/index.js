@@ -6,20 +6,18 @@ const app = express();
 
 let port = process.env.port || 3002;
 
-const staticDirectory = path.join(__dirname, 'public');
+const staticDirectory = path.join(__dirname, '/../public/');
 const staticAssets = express.static(staticDirectory);
-app.use(staticAssets);
+app.use('/', staticAssets);
 
-app.get('/:offeringId/api/reviews', (req, res) => {
+app.get('/:offeringId', (req, res) => {
   let offeringId = req.params.offeringId;
   db.getReviewsAtOffering(offeringId)
     .then((reviews) => {
-      db.connection.end();
       res.status(200).send(reviews);
     })
     .catch((err) => {
       console.log(err);
-      db.connection.end();
       res.status(400).send();
     })
 })
