@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar.jsx';
 import { 
   Top, 
+  TopLeft,
   NumOfReviews,
   Stars,
   GreenStar, 
@@ -44,12 +45,14 @@ class Rating extends React.Component {
     if(this.props.isTotal === true) {
       return ( 
         <Top>
-          <NumOfReviews>
-            {this.props.numOfReviews} Reviews
-          </NumOfReviews>
-          <Stars>
-            {this.convertNumToStars(this.props.total)}
-          </Stars>
+          <TopLeft>
+            <NumOfReviews>
+              {this.props.numOfReviews} Reviews
+            </NumOfReviews>
+            <Stars>
+              {this.convertNumToStars(this.props.total)}
+            </Stars>
+          </TopLeft>
           <SearchBar />
         </Top>
       )

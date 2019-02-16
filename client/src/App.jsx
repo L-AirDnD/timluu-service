@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews(3);
+    this.getReviews(1);
   }
 
   parseRatings(data) {
