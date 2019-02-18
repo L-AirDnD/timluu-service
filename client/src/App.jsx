@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import Rating from './Rating.jsx';
+import SearchBar from './SearchBar.jsx';
 import Comment from './Comment.jsx';
 import PageNumber from './PageNumber.jsx';
-import { AppContainer } from '../appStyles.jsx';
+import { AppContainer, Top } from '../appStyles.jsx';
 
 
 class App extends React.Component {
@@ -11,7 +12,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      reviews: []
+      reviews: [],
+      searchTerm: ''
     }
   }
 
@@ -26,7 +28,7 @@ class App extends React.Component {
   }
 
   getReviews(offeringId) {
-    axios.get(`/${offeringId}`)
+    return axios.get(`/${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({
@@ -47,7 +49,7 @@ class App extends React.Component {
         rating = review.ratings[rating];
         averageRating += rating;
       }
-      averageRating = averageRating / 6.0;
+      averageRating = averageRating / Object.keys(review.ratings).length;
       averageRatings.push(averageRating);
     }
 
@@ -59,16 +61,12 @@ class App extends React.Component {
   }
 
   computeSubRatings() {
-    let subRatings = {
-      accuracy: 0,
-      communication: 0,
-      cleanliness: 0,
-      location: 0,
-      checkin: 0,
-      value: 0
-    };
+    let subRatings = {};
     for(let review of this.state.reviews) {
       for(let rating in review.ratings) {
+        if(subRatings[rating] === undefined) {
+          subRatings[rating] = 0;
+        }
         subRatings[rating] += review.ratings[rating];
       }
     }
@@ -78,13 +76,29 @@ class App extends React.Component {
     return subRatings;
   }
 
+  handleSearchChange(event) {
+    this.setState({
+      searchTerm: event.target.value
+    })
+  }
+
+  handleSearchCancel() {
+    this.setState({
+      searchTerm: ''
+    })
+  }
+
   render() {
     let totalRating = this.computeTotalRating();
     let subRatings = this.computeSubRatings();
     return (
       <AppContainer>
-        <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 
-        total={isNaN(totalRating) ? 0 : totalRating}/>
+        <Top>
+          <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 
+          total={isNaN(totalRating) ? 0 : totalRating}/>
+          <SearchBar searchTerm={this.state.searchTerm} 
+          onChange={this.handleSearchChange.bind(this)} onClick={this.handleSearchCancel.bind(this)}/>
+        </Top>
         <Rating subRatings={subRatings}/>
         <Comment reviews={this.state.reviews}/>
         <PageNumber />

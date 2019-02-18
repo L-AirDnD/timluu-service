@@ -1,7 +1,5 @@
 import React from 'react';
-import SearchBar from './SearchBar.jsx';
-import { 
-  Top, 
+import {  
   TopLeft,
   NumOfReviews,
   Stars,
@@ -44,17 +42,14 @@ class Rating extends React.Component {
   render() {
     if(this.props.isTotal === true) {
       return ( 
-        <Top>
-          <TopLeft>
-            <NumOfReviews>
-              {this.props.numOfReviews} Reviews
-            </NumOfReviews>
-            <Stars>
-              {this.convertNumToStars(this.props.total)}
-            </Stars>
-          </TopLeft>
-          <SearchBar />
-        </Top>
+        <TopLeft>
+          <NumOfReviews>
+            {this.props.numOfReviews} Reviews
+          </NumOfReviews>
+          <Stars>
+            {this.convertNumToStars(this.props.total)}
+          </Stars>
+        </TopLeft>
       )
     } else{
       return (

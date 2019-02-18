@@ -3,19 +3,6 @@ import { StarHalf } from 'styled-icons/boxicons-solid/StarHalf';
 import { Star as StarBorder } from 'styled-icons/boxicons-regular/Star';
 import styled from 'styled-components';
 
-export const Top = styled.div`
-  display: block;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-  font-size: 24px;
-  font-weight: 650;
-  width: 100%;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom-width: 1px;
-  border-bottom-color: #EBEBEB;
-  border-bottom-style: solid;
-`
-
 export const TopLeft = styled.div`
   display: inline-block;
   width: 66%;
@@ -29,6 +16,7 @@ export const NumOfReviews = styled.div`
 export const Stars = styled.div`
   display: inline-block;
   width: 65%;
+  padding-bottom: 2px;
 `
 
 export const GreenStar = styled(Star)`
