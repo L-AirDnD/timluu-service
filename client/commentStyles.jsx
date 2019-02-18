@@ -1,12 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react';
 import styled from 'styled-components';
 
 export const ReviewInfo = styled.div`
   color: #484848;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
   display: table;
-  width: 100%
+  width: 100%;
   margin-top: 16px;
 `
 export const ReviewImage = styled.img`
@@ -21,7 +19,7 @@ export const ReviewImage = styled.img`
 
 export const NameDate = styled.div`
   display: table-cell;
-  width: 100%
+  width: 100%;
   vertical-align: top;
   padding-left: 16px;
 `

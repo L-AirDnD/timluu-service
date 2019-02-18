@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react';
+import { Search } from '../searchBarStyles.jsx';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -8,9 +8,9 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <Search>
         Insert SearchBar here.
-      </div>
+      </Search>
     )
   }
 }
