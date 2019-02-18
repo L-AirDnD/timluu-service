@@ -6,6 +6,7 @@ export const Search = styled.div`
   width: 33%;
   text-align: right;
   padding-left: 5px;
+  padding-bottom: 5px;
 `
 
 export const Bar = styled.div`
@@ -14,20 +15,34 @@ export const Bar = styled.div`
   border-color: #EBEBEB;
   border-radius: 4px;
   border-style: solid;
+  text-align: left;
 `
 
 export const SearchIcon = styled(Icon)`
   display: inline-block;
-  margin: 0;
-  text-align: left;
+  padding-left: 5px;
   width: 10%;
 `
 export const SearchInput = styled.input`
+  display: inline-block;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
   font-size: 14px;
-  font-color: #484848;
-  padding: 7px;
+  color: #484848;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
   outline: none;
   border-width: 0px;
-  width: 80%;
+  width: 75%;
+  text-align: left;
+`
+export const SearchCancel = styled.div`
+  display: inline-block;  
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  color: #484848;
+  font-weight: 100; 
+  vertical-align: middle;
+  text-align: right;
+  width: 5%;
 `
