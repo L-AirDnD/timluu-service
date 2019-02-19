@@ -10,9 +10,9 @@ let connection = mysql.createConnection(config);
  * Database and table schema creation
  */
 
-connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;`)
+connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd-reviews; CREATE DATABASE lairdnd-reviews;`)
   .then(() => { 
-    return connection.queryAsync(`USE lairdnd;`);
+    return connection.queryAsync(`USE lairdnd-reviews;`);
   })
   .then(() => {
     return connection.queryAsync(`CREATE TABLE owners (
