@@ -4,15 +4,19 @@ let Promise = require('bluebird');
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 let faker = require('faker');
 
-let connection = mysql.createConnection(config);
+let connection = mysql.createConnection({
+  user: config.user,
+  password: config.password,
+  multipleStatements: config.multipleStatements
+});
 
 /*
  * Database and table schema creation
  */
 
-connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd-reviews; CREATE DATABASE lairdnd-reviews;`)
+connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd_reviews; CREATE DATABASE lairdnd_reviews;`)
   .then(() => { 
-    return connection.queryAsync(`USE lairdnd-reviews;`);
+    return connection.queryAsync(`USE lairdnd_reviews;`);
   })
   .then(() => {
     return connection.queryAsync(`CREATE TABLE owners (
