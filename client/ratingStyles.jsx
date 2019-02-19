@@ -3,22 +3,20 @@ import { StarHalf } from 'styled-icons/boxicons-solid/StarHalf';
 import { Star as StarBorder } from 'styled-icons/boxicons-regular/Star';
 import styled from 'styled-components';
 
-export const Top = styled.div`
-  display: block;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-  font-size: 24px;
-  font-weight: 650;
-  width: 100%;
+export const TopLeft = styled.div`
+  display: inline-block;
+  width: 66%;
 `
 
 export const NumOfReviews = styled.div`
   display: inline-block;
-  width: 18%;
+  width: 35%;
 `
 
 export const Stars = styled.div`
   display: inline-block;
-  width: 22%;
+  width: 65%;
+  padding-bottom: 2px;
 `
 
 export const GreenStar = styled(Star)`

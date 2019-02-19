@@ -42,4 +42,9 @@ export const ReviewComment = styled.div`
   color: #484848;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
   margin-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom-width: 1px;
+  border-bottom-color: #EBEBEB;
+  border-bottom-style: solid;
 `

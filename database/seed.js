@@ -59,10 +59,10 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
   })
   .then(() => {
     /*
-     * Seed data of 100 owners
+     * Seed data of 1 owners
      */
     let owners = [];
-    for(var i = 0; i < 100; i++) {
+    for(var i = 0; i < 1; i++) {
       let randomOwner = faker.name.findName();
       owners.push(`"${randomOwner}"`);
     }
@@ -71,14 +71,14 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
   })
   .then(() => {
     /*
-     * Seed data of 100 offerings
+     * Seed data of 1 offerings
      */
     let offerings = [];
-    for(var i = 0; i < 100; i++) {
+    for(var i = 0; i < 1; i++) {
       let randomPlace = faker.address.city() + faker.address.country();
       let randomOwner = faker.random.number({
         min: 1,
-        max: 100
+        max: 1
       });
       offerings.push(`"${randomPlace}", ${randomOwner}`);
     }
@@ -92,11 +92,10 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
     let guests = [];
     for(var i = 0; i < 100; i++) {
       let randomGuest = faker.name.findName();
-      let randomURL = faker.image.imageUrl();
-      guests.push(`"${randomGuest}", "${randomURL}"`);
+      guests.push(`"${randomGuest}"`);
     }
     guests = guests.join(`), (`);
-    return connection.queryAsync(`INSERT INTO guests (name, photo_url) VALUES (${guests});`)
+    return connection.queryAsync(`INSERT INTO guests (name) VALUES (${guests});`)
   })
   .then(() => {
     /*
@@ -108,7 +107,7 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd; CREATE DATABASE lairdnd;
       let review = []; 
       review.push(faker.random.number({
         min: 1,
-        max: 100
+        max: 1
       }));
       review.push(faker.random.number({
         min: 1,

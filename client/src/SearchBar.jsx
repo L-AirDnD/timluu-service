@@ -1,5 +1,11 @@
 import React from 'react';
-import { Search } from '../searchBarStyles.jsx';
+import { 
+  Search, 
+  Bar, 
+  SearchIcon, 
+  SearchInput, 
+  SearchCancel 
+} from '../searchBarStyles.jsx';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -9,7 +15,15 @@ class SearchBar extends React.Component {
   render() {
     return (
       <Search>
-        Insert SearchBar here.
+        <Bar>
+          <SearchIcon size="15"/>
+          <SearchInput type="text" placeholder="Search reviews" 
+          value={this.props.searchTerm} onChange={this.props.onChange}/>
+          {
+            this.props.searchTerm === '' ? '' : 
+            <SearchCancel onClick={this.props.onClick}>X</SearchCancel>
+          }
+        </Bar>
       </Search>
     )
   }
