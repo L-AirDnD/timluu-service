@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+const { styled } = window;
 
 export const ReviewInfo = styled.div`
   color: #484848;
