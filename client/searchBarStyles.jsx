@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+const { styled } = window;
 import { Search as Icon } from 'styled-icons/feather/Search';
 
 export const Search = styled.div`

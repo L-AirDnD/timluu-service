@@ -1,7 +1,7 @@
 import { Star } from 'styled-icons/boxicons-solid/Star';
 import { StarHalf } from 'styled-icons/boxicons-solid/StarHalf';
 import { Star as StarBorder } from 'styled-icons/boxicons-regular/Star';
-import styled from 'styled-components';
+const { styled } = window;
 
 export const TopLeft = styled.div`
   display: inline-block;

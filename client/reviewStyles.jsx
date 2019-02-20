@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react';
-import styled from 'styled-components';
+const { styled } = window;
 
 export const AppContainer = styled.div`
   max-width: 696px;
