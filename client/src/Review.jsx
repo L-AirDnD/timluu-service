@@ -4,10 +4,10 @@ import Rating from './Rating.jsx';
 import SearchBar from './SearchBar.jsx';
 import Comment from './Comment.jsx';
 import PageNumber from './PageNumber.jsx';
-import { AppContainer, Top } from '../appStyles.jsx';
+import { AppContainer, Top } from '../reviewStyles.jsx';
 
 
-class App extends React.Component {
+class Review extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   getReviews(offeringId) {
-    return axios.get(`/${offeringId}`)
+    return axios.get(`http://localhost:3002/${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({
@@ -107,4 +107,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Review;

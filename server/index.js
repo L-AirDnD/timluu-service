@@ -11,6 +11,7 @@ const staticAssets = express.static(staticDirectory);
 app.use('/', staticAssets);
 
 app.get('/:offeringId', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   let offeringId = req.params.offeringId;
   db.getReviewsAtOffering(offeringId)
     .then((reviews) => {
