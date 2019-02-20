@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   getReviews(offeringId) {
-    return axios.get(`/${offeringId}`)
+    return axios.get(`http://localhost:3002/${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({
