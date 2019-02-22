@@ -13,6 +13,8 @@ class Review extends React.Component {
 
     this.state = {
       reviews: [],
+      pages: [[]],
+      currentPage: 0,
       searchTerm: ''
     }
   }
@@ -24,8 +26,9 @@ class Review extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(this.state.reviews !== prevState.reviews) {
       this.setState({
-        reviews: this.state.reviews
-      }, this.render)
+        reviews: this.state.reviews,
+        pages: this.state.pages
+      })
     }
   }
 
@@ -37,17 +40,32 @@ class Review extends React.Component {
 
   getReviews(offeringId) {
     let host = window.location.host;
-    console.log(`http://${host}/api${offeringId}`);
     return axios.get(`http://${host}/api${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({
-          reviews: response.data
+          reviews: response.data,
+          pages: this.divideComments(response.data)
         })
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  divideComments(comments) {
+    let totalComments = [];
+    let setOfComments;
+    for(let i = 0; i < comments.length; i++) {
+      let comment = comments[i];
+      setOfComments = (i % 7 === 0) ? [] : setOfComments;
+      setOfComments.push(comment);
+      if(setOfComments.length === 7 || i === comments.length - 1) { 
+        totalComments.push(setOfComments) 
+      }; 
+    }
+
+    return totalComments;
   }
 
   computeTotalRating() {
@@ -98,9 +116,24 @@ class Review extends React.Component {
     })
   }
 
+  handlePageChange(event) {
+    let value = event.target.innerText;
+    if(isNaN(parseInt(value))) {
+      let direction = value === '>' ? 1 : -1;
+      this.setState({
+        currentPage: this.state.currentPage + direction
+      })
+    } else {
+      this.setState({
+        currentPage: value - 1
+      })
+    }
+  }
+
   render() {
     let totalRating = this.computeTotalRating();
     let subRatings = this.computeSubRatings();
+    let currentPage = this.state.currentPage;
     return (
       <AppContainer>
         <Top>
@@ -110,8 +143,9 @@ class Review extends React.Component {
           onChange={this.handleSearchChange.bind(this)} onClick={this.handleSearchCancel.bind(this)}/>
         </Top>
         <Rating subRatings={subRatings}/>
-        <Comment reviews={this.state.reviews}/>
-        <PageNumber />
+        <Comment reviews={this.state.pages[currentPage]}/>
+        <PageNumber numOfPages={this.state.pages.length} currentPage={this.state.currentPage}
+        onClick={this.handlePageChange.bind(this)}/>
       </AppContainer>
     )
   }
