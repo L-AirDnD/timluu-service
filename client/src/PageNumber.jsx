@@ -9,7 +9,6 @@ class PageNumber extends React.Component {
   render() {
     return (
       <div>
-        Insert Pagination here.
       </div>
     )
   }

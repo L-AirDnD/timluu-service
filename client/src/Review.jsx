@@ -18,7 +18,15 @@ class Review extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews(1);
+    this.getReviews(window.location.pathname);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.reviews !== prevState.reviews) {
+      this.setState({
+        reviews: this.state.reviews
+      }, this.render)
+    }
   }
 
   parseRatings(data) {
@@ -28,7 +36,9 @@ class Review extends React.Component {
   }
 
   getReviews(offeringId) {
-    return axios.get(`http://localhost:3002/${offeringId}`)
+    let host = window.location.host;
+    console.log(`http://${host}/api${offeringId}`);
+    return axios.get(`http://${host}/api${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({

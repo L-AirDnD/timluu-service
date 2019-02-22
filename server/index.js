@@ -4,13 +4,17 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-let port = process.env.port || 3002;
+let port = process.env.PORT || 3002;
 
 const staticDirectory = path.join(__dirname, '/../public/');
 const staticAssets = express.static(staticDirectory);
-app.use('/', staticAssets);
+app.use(staticAssets);
 
 app.get('/:offeringId', (req, res) => {
+  res.sendFile(staticDirectory);
+})
+
+app.get('/api/:offeringId', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   let offeringId = req.params.offeringId;
   db.getReviewsAtOffering(offeringId)
