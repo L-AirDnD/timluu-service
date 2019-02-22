@@ -39,7 +39,7 @@ class Review extends React.Component {
   }
 
   getReviews(offeringId) {
-    let host = window.location.host;
+    let host = 'lairdndreviews.us-east-1.elasticbeanstalk.com';
     return axios.get(`http://${host}/api${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
