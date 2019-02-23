@@ -116,6 +116,12 @@ class Review extends React.Component {
     })
   }
 
+  searchFor(event) {
+    if(event.key === 'Enter') {
+      console.log(this.state.searchTerm);
+    }
+  }
+
   handlePageChange(event) {
     let value = event.target.innerText;
     if(isNaN(parseInt(value))) {
@@ -139,7 +145,7 @@ class Review extends React.Component {
         <Top>
           <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 
           total={isNaN(totalRating) ? 0 : totalRating}/>
-          <SearchBar searchTerm={this.state.searchTerm} 
+          <SearchBar searchTerm={this.state.searchTerm} onKeyPress={this.searchFor.bind(this)}
           onChange={this.handleSearchChange.bind(this)} onClick={this.handleSearchCancel.bind(this)}/>
         </Top>
         <Rating subRatings={subRatings}/>
