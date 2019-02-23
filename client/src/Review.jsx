@@ -53,13 +53,21 @@ class Review extends React.Component {
       })
   }
 
-  divideComments(comments) {
+  divideComments(comments, isSearching = false) {
     let totalComments = [];
-    let setOfComments;
+    let setOfComments = [];
     for(let i = 0; i < comments.length; i++) {
-      let comment = comments[i];
-      setOfComments = (i % 7 === 0) ? [] : setOfComments;
-      setOfComments.push(comment);
+      let review = comments[i];
+      setOfComments = (setOfComments.length % 7 === 0) ? [] : setOfComments;
+      
+      if(isSearching) {
+        if(this.includesSearchTerm(review)) {
+          setOfComments.push(review);
+        }
+      } else {
+        setOfComments.push(review);
+      } 
+      
       if(setOfComments.length === 7 || i === comments.length - 1) { 
         totalComments.push(setOfComments) 
       }; 
@@ -112,14 +120,22 @@ class Review extends React.Component {
 
   handleSearchCancel() {
     this.setState({
-      searchTerm: ''
-    })
+      searchTerm: '',
+      pages: this.divideComments(this.state.reviews)
+    });
   }
 
   searchFor(event) {
     if(event.key === 'Enter') {
-      console.log(this.state.searchTerm);
+      this.setState({
+        pages: this.divideComments(this.state.reviews, true),
+        currentPage: 0
+      });
     }
+  }
+
+  includesSearchTerm(review) {
+    return review.comment.split(' ').includes(this.state.searchTerm);
   }
 
   handlePageChange(event) {
