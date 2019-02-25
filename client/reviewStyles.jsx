@@ -3,7 +3,7 @@ import ReactDOM from 'react';
 const { styled } = window;
 
 export const AppContainer = styled.div`
-  max-width: 696px;
+  width: 696px;
 `
 
 export const Top = styled.div`

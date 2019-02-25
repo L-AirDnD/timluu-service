@@ -7,16 +7,17 @@ let faker = require('faker');
 let connection = mysql.createConnection({
   user: config.user,
   password: config.password,
-  multipleStatements: config.multipleStatements
+  multipleStatements: config.multipleStatements,
+  host: config.host
 });
 
 /*
  * Database and table schema creation
  */
 
-connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd_reviews; CREATE DATABASE lairdnd_reviews;`)
+connection.queryAsync(`DROP DATABASE IF EXISTS lairdndreviews; CREATE DATABASE lairdndreviews;`)
   .then(() => { 
-    return connection.queryAsync(`USE lairdnd_reviews;`);
+    return connection.queryAsync(`USE lairdndreviews;`);
   })
   .then(() => {
     return connection.queryAsync(`CREATE TABLE owners (
@@ -63,7 +64,7 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd_reviews; CREATE DATABASE 
   })
   .then(() => {
     /*
-     * Seed data of 1 owners
+     * Seed data of 1 owner
      */
     let owners = [];
     for(var i = 0; i < 1; i++) {
@@ -75,10 +76,10 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd_reviews; CREATE DATABASE 
   })
   .then(() => {
     /*
-     * Seed data of 1 offerings
+     * Seed data of 100 offerings
      */
     let offerings = [];
-    for(var i = 0; i < 1; i++) {
+    for(var i = 0; i < 100; i++) {
       let randomPlace = faker.address.city() + faker.address.country();
       let randomOwner = faker.random.number({
         min: 1,
@@ -103,15 +104,15 @@ connection.queryAsync(`DROP DATABASE IF EXISTS lairdnd_reviews; CREATE DATABASE 
   })
   .then(() => {
     /*
-     * Seed data of 100 reviews:
+     * Seed data of 500 reviews:
      * each review contains 6 sub-ratings
      */
     let reviews = [];
-    for(var i = 0; i < 100; i++) {
+    for(var i = 0; i < 500; i++) {
       let review = []; 
       review.push(faker.random.number({
         min: 1,
-        max: 1
+        max: 100
       }));
       review.push(faker.random.number({
         min: 1,

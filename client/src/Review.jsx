@@ -13,12 +13,23 @@ class Review extends React.Component {
 
     this.state = {
       reviews: [],
+      pages: [[]],
+      currentPage: 0,
       searchTerm: ''
     }
   }
 
   componentDidMount() {
-    this.getReviews(1);
+    this.getReviews(window.location.pathname);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.reviews !== prevState.reviews) {
+      this.setState({
+        reviews: this.state.reviews,
+        pages: this.state.pages
+      })
+    }
   }
 
   parseRatings(data) {
@@ -28,16 +39,41 @@ class Review extends React.Component {
   }
 
   getReviews(offeringId) {
-    return axios.get(`http://localhost:3002/${offeringId}`)
+    let host = 'lairdndreviews.us-east-1.elasticbeanstalk.com';
+    return axios.get(`http://${host}/api${offeringId}`)
       .then((response) => {
         this.parseRatings(response.data);
         this.setState({
-          reviews: response.data
+          reviews: response.data,
+          pages: this.divideComments(response.data)
         })
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  divideComments(comments, isSearching = false) {
+    let totalComments = [];
+    let setOfComments = [];
+    for(let i = 0; i < comments.length; i++) {
+      let review = comments[i];
+      setOfComments = (setOfComments.length % 7 === 0) ? [] : setOfComments;
+      
+      if(isSearching) {
+        if(this.includesSearchTerm(review)) {
+          setOfComments.push(review);
+        }
+      } else {
+        setOfComments.push(review);
+      } 
+      
+      if(setOfComments.length === 7 || i === comments.length - 1) { 
+        totalComments.push(setOfComments) 
+      }; 
+    }
+
+    return totalComments;
   }
 
   computeTotalRating() {
@@ -84,24 +120,54 @@ class Review extends React.Component {
 
   handleSearchCancel() {
     this.setState({
-      searchTerm: ''
-    })
+      searchTerm: '',
+      pages: this.divideComments(this.state.reviews)
+    });
+  }
+
+  searchFor(event) {
+    if(event.key === 'Enter') {
+      this.setState({
+        pages: this.divideComments(this.state.reviews, true),
+        currentPage: 0
+      });
+    }
+  }
+
+  includesSearchTerm(review) {
+    return review.comment.split(' ').includes(this.state.searchTerm);
+  }
+
+  handlePageChange(event) {
+    let value = event.target.innerText;
+    if(isNaN(parseInt(value))) {
+      let direction = value === '>' ? 1 : -1;
+      this.setState({
+        currentPage: this.state.currentPage + direction
+      })
+    } else {
+      this.setState({
+        currentPage: value - 1
+      })
+    }
   }
 
   render() {
     let totalRating = this.computeTotalRating();
     let subRatings = this.computeSubRatings();
+    let currentPage = this.state.currentPage;
     return (
       <AppContainer>
         <Top>
           <Rating isTotal={true} numOfReviews = {this.state.reviews.length} 
           total={isNaN(totalRating) ? 0 : totalRating}/>
-          <SearchBar searchTerm={this.state.searchTerm} 
+          <SearchBar searchTerm={this.state.searchTerm} onKeyPress={this.searchFor.bind(this)}
           onChange={this.handleSearchChange.bind(this)} onClick={this.handleSearchCancel.bind(this)}/>
         </Top>
         <Rating subRatings={subRatings}/>
-        <Comment reviews={this.state.reviews}/>
-        <PageNumber />
+        <Comment reviews={this.state.pages[currentPage]}/>
+        <PageNumber numOfPages={this.state.pages.length} currentPage={this.state.currentPage}
+        onClick={this.handlePageChange.bind(this)}/>
       </AppContainer>
     )
   }

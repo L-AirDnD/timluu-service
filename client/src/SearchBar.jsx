@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
       <Search>
         <Bar>
           <SearchIcon size="15"/>
-          <SearchInput type="text" placeholder="Search reviews" 
+          <SearchInput type="text" placeholder="Search reviews" onKeyPress={this.props.onKeyPress}
           value={this.props.searchTerm} onChange={this.props.onChange}/>
           {
             this.props.searchTerm === '' ? '' : 
